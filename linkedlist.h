@@ -6,7 +6,7 @@
 #include <string.h>
 
 typedef struct ListNode{
-    void* data;
+    char* data;
     struct ListNode* next;
     struct ListNode* prev;
 } ListNode;
