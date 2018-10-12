@@ -21,9 +21,9 @@ void start(char* filename)
     readLines(list,filename);
     length = getLength(list);
 
-    upperCase(list);
     /*if(test(list)==TRUE)
     {
+        upperCase(list);
     }
     else
     {
