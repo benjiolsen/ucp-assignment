@@ -29,7 +29,7 @@ void readLines(LinkedList* list,char* filename)
         }
         else
         {
-            perror("There was an error reading from the file");
+            fprintf(stderr,"There was no data in the file\n");
             fclose(plotdata);
         }
     }
