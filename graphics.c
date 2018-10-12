@@ -16,14 +16,14 @@ void start(char* filename)
 {
     int length;
     LinkedList* list = NULL;
-
     list = makeEmpty();
+
     readLines(list,filename);
     length = getLength(list);
 
+    upperCase(list);
     /*if(test(list)==TRUE)
     {
-        upperCase(list);
     }
     else
     {
@@ -36,25 +36,22 @@ void upperCase(LinkedList* list)
 {
     int ii = 0;
     int length = 0;
-    char* string;
     ListNode* temp = list->head;
 
     while(temp->next!=NULL)
     {
-        string = (char*)temp->data;
-        length = strlen(string) - 1;
+        length = strlen(temp->data) - 1;
         for(ii=0;ii<length;ii++)
         {
-            if(string[ii] <= 122 && string[ii] >= 97)
+            if(temp->data[ii] <= 122 && temp->data[ii] >= 97)
             {
-                string[ii] = string[ii] - 32;
+                temp->data[ii] = temp->data[ii] - 32;
             }
         }
 
         temp = temp->next;
     }
     temp = NULL;
-    string = NULL;
 }
 
 int test(LinkedList* list)
