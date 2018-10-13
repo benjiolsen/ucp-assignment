@@ -31,7 +31,7 @@ void readLines(LinkedList* list,char* filename)
         }
         else
         {
-            /* fprintf because i dont like it saying Error:Success with
+            /* fprintf because i don't like it saying Error:Success with
                perror */
             fprintf(stderr,"There was no data in the file\n");
             /* also close the dangly boi */
