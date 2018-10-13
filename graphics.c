@@ -2,11 +2,11 @@
 int main(int argc,char** argv)
 {
     if(argc==2)
-    {
+    {/* Ensures no funny buisness is put in */
         start(argv[1]);
     }
     else
-    {
+    {/* Tells you off for being naughty */
         fprintf(stderr,"Please run as\n./graphics {filename}\n");
     }
     return 0;
@@ -44,7 +44,7 @@ void upperCase(LinkedList* list)
         for(ii=0;ii<length;ii++)
         {
             if(temp->data[ii] <= 122 && temp->data[ii] >= 97)
-            {
+            {/* If it is a lowercase letter, make it uppercase */
                 temp->data[ii] = temp->data[ii] - 32;
             }
         }
