@@ -20,8 +20,8 @@ void readLines(LinkedList* list,char* filename)
         if(fgets(buffer,BUFFER_SIZE,plotdata)!=NULL)
         {/* Attempts to read in the first line, if it cant, runs the else */
             do
-            {/* Loops through the file, reading the lines into a stack array
-                then mallocs them */
+            {/* Loops through the file, reading the characters into a stack
+                array then puts them into a malloced heap array */
                 line = stringDupe(buffer);
                 insertFirst(list,line);
             }
