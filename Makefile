@@ -13,7 +13,7 @@ linkedlist.o: linkedlist.c linkedlist.h
 io.o: io.c io.h linkedlist.h
 	$(CC) $(CFLAGS) io.c
 graphics.o: graphics.c graphics.h io.h linkedlist.h
-	$(CC) $(CFLAGS) -lm graphics.c
+	$(CC) $(CFLAGS) graphics.c
 
 clean:
 	rm *.o graphics
