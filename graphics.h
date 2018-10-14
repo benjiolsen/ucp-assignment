@@ -7,8 +7,6 @@
 #define TRUE 0
 #define FALSE !TRUE
 
-#include <math.h>
-
 #include "io.h"
 #include "linkedlist.h"
 
@@ -18,7 +16,5 @@ void upperCase(LinkedList* list);
 /* Is the start of the program, and does the inital work of calling functions
    and setting up the linked list */
 void start(char* filename);
-/* Will run through the COMMANDS and ensure each one entered was valid */
-int test(LinkedList* list);
 
 #endif

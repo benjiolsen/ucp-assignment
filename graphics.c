@@ -19,7 +19,6 @@ void start(char* filename)
     list = makeEmpty();
 
     readLines(list,filename);
-    length = getLength(list);
 
     /*if(test(list)==TRUE)
     {
@@ -29,7 +28,7 @@ void start(char* filename)
     {
         fprintf(stderr,"Please ensure the file has the correct commands\n");
     }*/
-    
+
     freeList(list);
 }
 
@@ -53,10 +52,4 @@ void upperCase(LinkedList* list)
         temp = temp->next;
     }
     temp = NULL;
-}
-
-int test(LinkedList* list)
-{
-    int correct = FALSE;
-    return correct;
 }
