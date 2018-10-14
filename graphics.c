@@ -29,6 +29,7 @@ void start(char* filename)
     {
         fprintf(stderr,"Please ensure the file has the correct commands\n");
     }*/
+    
     freeList(list);
 }
 
