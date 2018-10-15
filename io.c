@@ -27,6 +27,7 @@ int readLines(LinkedList* list,char* filename)
             {
                 if(sscanf(buffer,"%s %s",command,value)==2)
                 {
+                    upperCase(command);
                     insertFirst(list,stringDupe(command),stringDupe(value));
                 }
                 else

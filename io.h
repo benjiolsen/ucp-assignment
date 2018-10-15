@@ -11,6 +11,7 @@
 #include <string.h>
 #include "linkedlist.h"
 #include "graphics.h"
+#include "operations.h"
 
 /* Reads the lines into a linked list, creating a string of the right size
    and sending that to insertLast */
