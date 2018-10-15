@@ -14,12 +14,17 @@ int main(int argc,char** argv)
 
 void start(char* filename)
 {
-    int length;
+    /*int length;*/
     LinkedList* list = NULL;
     list = makeEmpty();
+    if(readLines(list,filename) == FALSE)
+    {
 
-    readLines(list,filename);
-
+    }
+    else
+    {
+        fprintf(stderr,"There was an erronous file\n");
+    }
     /*if(test(list)==TRUE)
     {
         upperCase(list);
@@ -30,26 +35,4 @@ void start(char* filename)
     }*/
 
     freeList(list);
-}
-
-void upperCase(LinkedList* list)
-{
-    int ii = 0;
-    int length = 0;
-    ListNode* temp = list->head;
-
-    while(temp->next!=NULL)
-    {
-        length = strlen(temp->data) - 1;
-        for(ii=0;ii<length;ii++)
-        {
-            if(temp->data[ii] <= 122 && temp->data[ii] >= 97)
-            {/* If it is a lowercase letter, make it uppercase */
-                temp->data[ii] = temp->data[ii] - 32;
-            }
-        }
-
-        temp = temp->next;
-    }
-    temp = NULL;
 }
