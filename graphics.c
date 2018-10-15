@@ -19,20 +19,20 @@ void start(char* filename)
     list = makeEmpty();
     if(readLines(list,filename) == FALSE)
     {
-
+        if(test(list)==TRUE)
+        {
+            
+        }
+        else
+        {
+            fprintf(stderr,"Please ensure the file has the correct commands\n");
+        }
     }
     else
     {
         fprintf(stderr,"There was an erronous file\n");
     }
-    /*if(test(list)==TRUE)
-    {
-        upperCase(list);
-    }
-    else
-    {
-        fprintf(stderr,"Please ensure the file has the correct commands\n");
-    }*/
+
 
     freeList(list);
 }
