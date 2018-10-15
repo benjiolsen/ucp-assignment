@@ -12,11 +12,12 @@ LinkedList* makeEmpty()
     return list;
 }
 
-void insertFirst(LinkedList* list,void *inData)
+void insertFirst(LinkedList* list,char *inCom,char* inVal)
 {
     ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
 
-    newNode->data=inData;
+    newNode->command=inCom;
+    newNode->value=inVal;
     if(list->head==NULL)
     {/* If there isnt any values, the first is also the last */
         list->head = newNode;
@@ -33,11 +34,12 @@ void insertFirst(LinkedList* list,void *inData)
     }
 }
 
-void insertLast(LinkedList* list, void *inData)
+void insertLast(LinkedList* list,char *inCom,char* inVal)
 {
     ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
 
-    newNode->data=inData;
+    newNode->command=inCom;
+    newNode->value=inVal;
     if(list->head==NULL)
     {/* If the list is empty, the end is also the start */
         list->head = newNode;
@@ -84,8 +86,10 @@ void deleteFirst(LinkedList* list)
     }
     else if(list->head->next==NULL)
     {/* If the list has one element, remove the head and tail */
-        free(list->head->data);
-        list->head->data=NULL;
+        free(list->head->command);
+        list->head->command=NULL;
+        free(list->head->value);
+        list->head->value=NULL;
         free(list->head);
         list->head=NULL;
         list->tail=NULL;
@@ -93,8 +97,10 @@ void deleteFirst(LinkedList* list)
     else
     {/* Otherwise, just remove the head and shuffle it all down */
         temp = list->head->next;
-        free(list->head->data);
-        list->head->data = NULL;
+        free(list->head->command);
+        list->head->command = NULL;
+        free(list->head->value);
+        list->head->value = NULL;
         free(list->head);
         list->head=NULL;
         list->head = temp;
@@ -111,8 +117,10 @@ void deleteLast(LinkedList* list)
     }
     else if(list->head->next==NULL)
     {/* If the list has one item in it, remove both head and tail */
-        free(list->head->data);
-        list->head->data=NULL;
+        free(list->head->command);
+        list->head->command=NULL;
+        free(list->head->value);
+        list->head->value=NULL;
         free(list->head);
         list->head=NULL;
         list->tail=NULL;
@@ -120,8 +128,10 @@ void deleteLast(LinkedList* list)
     else
     {/* Otherwise, remove the tail, and point the tail to the previous */
         temp = list->tail->prev;
-        free(list->tail->data);
-        list->tail->data = NULL;
+        free(list->tail->command);
+        list->tail->command = NULL;
+        free(list->tail->value);
+        list->tail->value = NULL;
         free(list->tail);
         list->tail=NULL;
         list->tail = temp;
@@ -140,10 +150,12 @@ void freeRecurse(ListNode* cur)
     if(cur!= NULL)
     {/* Feels like you were here a second ago */
         /* Keeps calling until the end of the list, then frees all the
-           data and pointers going back up! */
+           commands + values and pointers going back up! */
         freeRecurse(cur->next);
-        free(cur->data);
-        cur->data = NULL;
+        free(cur->command);
+        cur->command = NULL;
+        free(cur->value);
+        cur->value = NULL;
         free(cur);
         cur = NULL;
     }

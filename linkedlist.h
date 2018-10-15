@@ -17,7 +17,8 @@ Purpose: To act as the header file for the linked list file. Contains the
    next node in the list (and the previous) */
 typedef struct ListNode
 {
-    char* data;
+    char* command;
+    char* value;
     struct ListNode* next;
     struct ListNode* prev;
 } ListNode;
@@ -35,7 +36,7 @@ typedef struct
 LinkedList* makeEmpty();
 /* Inserts an item into the front of a linked list, doing the checking and
    possible shuffling needed */
-void insertFirst(LinkedList* list,void *inData);
+void insertFirst(LinkedList* list,char *inCom,char* inVal);
 /* Acts to call the lengthRecurse module to recusively get the length of the
    list by traversing through it */
 int getLength(LinkedList* list);
@@ -50,7 +51,7 @@ void freeList(LinkedList* list);
 /* Recusively calls itself, freeing each node as it goes */
 void freeRecurse(ListNode* cur);
 /* Inserts the item at the tail of the list */
-void insertLast(LinkedList* list, void *inData);
+void insertLast(LinkedList* list,char *inCom,char* inVal);
 /* Deletes the item at the tail of the list */
 void deleteLast(LinkedList* list);
 
