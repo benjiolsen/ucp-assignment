@@ -14,9 +14,14 @@
 typdef struct
 {
     char* operation;
-    char pattern;
+    char pattern[1];
     void* value;
+    int x1,x2,y1,y2;
 }Commands;
+
+/* Iterates through a string and converts each lowercase letter to an
+   uppercase letter by shifting the ASCII value down */
+void upperCase(char* string);
 
 /* Will run through the commands and ensure each one entered was valid */
 int test(LinkedList* list);
