@@ -14,14 +14,21 @@ int main(int argc,char** argv)
 
 void start(char* filename)
 {
-    /*int length;*/
     LinkedList* list = NULL;
+
     list = makeEmpty();
     if(readLines(list,filename) == FALSE)
     {
         if(test(list)==TRUE)
         {
-            
+            if(execute(list))
+            {
+
+            }
+            else
+            {
+                fprintf(stderr,"There was an error executing the function");
+            }
         }
         else
         {

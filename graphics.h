@@ -9,6 +9,7 @@
 
 #include "io.h"
 #include "linkedlist.h"
+#include "effects.h"
 
 /* Is the start of the program, and does the inital work of calling functions
    and setting up the linked list */
