@@ -10,10 +10,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "linkedlist.h"
+#include "graphics.h"
 
 /* Reads the lines into a linked list, creating a string of the right size
    and sending that to insertLast */
-void readLines(LinkedList* list,char* filename);
+int readLines(LinkedList* list,char* filename);
 /* Duplicates the stack string into a malloced string so that I could use
    pointers easier */
 char* stringDupe(char* source);
