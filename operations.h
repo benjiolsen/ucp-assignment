@@ -8,16 +8,15 @@
 #define PI 3.1415
 
 #include <math.h>
+#include "linkedlist.h"
+#include "graphics.h"
+#include "effects.h"
+#include "io.h"
 
-/* Defines the struct to hold command and its value, along with the pattern
-   that it would correspond to */
-typdef struct
+typedef struct
 {
-    char* operation;
-    char pattern[1];
-    void* value;
     int x1,x2,y1,y2;
-}Commands;
+}Position;
 
 /* Iterates through a string and converts each lowercase letter to an
    uppercase letter by shifting the ASCII value down */
@@ -25,5 +24,11 @@ void upperCase(char* string);
 
 /* Will run through the commands and ensure each one entered was valid */
 int test(LinkedList* list);
+/* Plots the pattern across the screen */
+void plotter(void *plotData);
+/* Converts degrees to radians for sin and cos */
+void radians(double* degrees);
+/* Rounds a double to the nearest integer value */
+int round(double value);
 
 #endif

@@ -17,57 +17,45 @@ int round(double value)
 
 void radians(double* degrees)
 {/* RAD = DEG * PI/180 ezpz*/
-    degrees = ( degrees * (PI/180) );
+    *degrees = ( (*degrees) * (PI/180) );
 }
 
-Plotfunc plotter(void *plotData)
+void plotter(void *plotData)
 {
-    if(((char*)plotdata == plotdata)&&(plotData != NULL))
+    if(((char*)plotData == plotData)&&(plotData != NULL))
     {
-        printf("%c",(char*)plotData);
+        printf("%s",(char*)plotData);
     }
 }
 
-Commands* extract(LinkedList list)
+int test(LinkedList* list)
 {
-    int ii, length = getLength(list);
-    char* number;
-    char *string, *pattern;
-    Commands* commands = NULL;
-    ListNode cur = list->head;
-
-    commands = (Commands*)malloc(length*sizeof(Commands));
-    while(sscanf(list->data,"%s %s",&string,&number)!=NULL)
-    {
-        upperCase(string);
-        if(strcmp(string,"PATTERN"))
-        {
-            strcpy(number,pattern)
-        }
-        else
-        {
-            strcpy(commands[ii]->Operation,string);
-        }
-
-        ii++;
-    }
-}
-
-int test(Commands* commands)
-{
+    ListNode* cur = list->head;
     char move[] = "MOVE";
     char rotate[] = "ROTATE";
     char draw[] = "DRAW";
     char fg[] = "FG";
     char bg[] = "BG";
     char pattern[] = "PATTERN";
-    int correct = FALSE;
+    int correct = TRUE;
 
     do
     {
+        if(strcmp(cur->command,move)==0 ||
+           strcmp(cur->command,rotate)==0 ||
+           strcmp(cur->command,draw)==0 ||
+           strcmp(cur->command,fg)==0 ||
+           strcmp(cur->command,bg)==0 ||
+           strcmp(cur->command,pattern)==0)
+        {
 
-    }while();
-
+        }
+        else
+        {
+            correct=FALSE;
+        }
+        cur = cur->next;
+    }while(correct==TRUE&&cur!=NULL);
     return correct;
 }
 
