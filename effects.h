@@ -1,3 +1,6 @@
+#ifndef EFFECTS_H
+#define EFFECTS_H
+
 /**
  * Defines the plotter functions required by line().
  */
@@ -29,3 +32,4 @@ void setFgColour(int code);
  * Changes the background colour to a code from 0-7.
  */
 void setBgColour(int code);
+#endif
