@@ -1,13 +1,16 @@
 #include "operations.h"
 
-double rotate(void* angle)
+void rotate(double* curAngle,double newAngle)
 {
-
+    *curAngle = *curAngle - newAngle;
 }
 
-void distance(Position* pos,double angle,int dist)
+void distance(Position* pos,double angle,double dist)
 {
-
+    pos->x1 = pos->x2;
+    pos->y1 = pos->y2;
+    pos->x2 = pos->x1 + ( dist * (cos(angle)) );
+    pos->y2 = pos->y1 + ( dist * (sin(angle)) );
 }
 
 int round(double value)
@@ -28,48 +31,72 @@ int round(double value)
 int execute(LinkedList* list)
 {
     ListNode* cur = NULL;
-    Position* pos;
+    Position* pos = (Position*)malloc(sizeof(Position));
     char pattern = '+';
-    char *empty = ' ';
-    int distance,fg,bg;
-    double value,angle = 0;
+    double dist = 0.0;
+    int valid = TRUE;
+    double angle = 0.0;
+    double newAngle = 0.0;
+
+    pos->x1 = 0.0;
+    pos->x2 = 0.0;
+    pos->y1 = 0.0;
+    pos->y2 = 0.0;
     cur = list->head;
-    /*clearScreen();*/
+
+    clearScreen();
+    setFgColour(7);
+    setBgColour(0);
+
     do
     {
         if(strcmp(cur->command,"MOVE")==0)
         {
-            line(pos->x1,pos->y1,pos->x2,pos->y2,&plotter,empty);
+            dist = atof(cur->value)-1.0;
+            distance(pos,angle,1.0);
+            distance(pos,angle,dist);
         }
         else if(strcmp(cur->command,"DRAW")==0)
         {
-            line(pos->x1,pos->y1,pos->x2,pos->y2,&plotter,&pattern);
+            dist = atof(cur->value) - 1.0;
+            distance(pos,angle,1.0);
+            distance(pos,angle,dist);
+            line(round(pos->x1),round(pos->y1),round(pos->x2),
+                 round(pos->y2),&plotter,&pattern);
         }
         else if(strcmp(cur->command,"ROTATE")==0)
         {
-
+            newAngle = atof(cur->value);
+            radians(&newAngle);
+            rotate(&angle,newAngle);
         }
         else if(strcmp(cur->command,"FG")==0)
         {
-            if(atoi(cur->value)!=0)
+            if(atoi(cur->value)>=0)
             {
-                setFgColour(atoi(cur->value));
+                setFgColour(round(atoi(cur->value)));
             }
         }
         else if(strcmp(cur->command,"BG")==0)
         {
-            if(atoi(cur->value)!=0)
+            if(atoi(cur->value)>=0)
             {
-                setBgColour(atoi(cur->value));
+                setBgColour(round(atoi(cur->value)));
             }
         }
         else if(strcmp(cur->command,"PATTERN")==0)
         {
             if(cur->value[0] == ' ')
+            {
+                valid = FALSE;
+            }
             pattern = cur->value[0];
         }
         cur = cur->next;
-    }while(cur!=NULL)
+    }while(cur!=NULL&&valid == TRUE);
+    penDown();
+    free(pos);
+    return valid;
 }
 
 void radians(double* degrees)
