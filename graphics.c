@@ -21,7 +21,7 @@ void start(char* filename)
     {
         if(test(list)==TRUE)
         {
-            if(execute(list))
+            if(execute(list)==TRUE)
             {
 
             }
