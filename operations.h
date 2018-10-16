@@ -15,7 +15,7 @@
 
 typedef struct
 {
-    int x1,x2,y1,y2;
+    double x1,x2,y1,y2;
 }Position;
 
 /* Iterates through a string and converts each lowercase letter to an
@@ -30,5 +30,9 @@ void plotter(void *plotData);
 void radians(double* degrees);
 /* Rounds a double to the nearest integer value */
 int round(double value);
+/* Changes the current angle with the input angle */
+void rotate(double* curAngle,double newAngle);
+/* Executes the commands that the file says to */
+int execute(LinkedList* list);
 
 #endif
