@@ -14,10 +14,13 @@ int readLines(LinkedList* list,char* filename)
     if(plotdata==NULL)
     {/* Handles the file not existing problem */
         perror("There was an error opening the file");
+        failed = TRUE;
     }
     else if(ferror(plotdata))
     {/* Checks if file is okay to use */
         perror("There was an error with the file");
+        failed = TRUE;
+        fclose(plotdata);
     }
     else
     {
@@ -45,12 +48,54 @@ int readLines(LinkedList* list,char* filename)
             /* fprintf because i don't like it saying Error:Success with
                perror */
             fprintf(stderr,"There was no data in the file\n");
+            failed = TRUE;
             /* also close the dangly open boi */
             fclose(plotdata);
         }
     }
     free(command);
     free(value);
+    return failed;
+}
+
+int commandLog(LinkedList* list)
+{
+    FILE* logFile = NULL;
+    ListNode* cur = NULL;
+    int failed = FALSE;
+
+    logFile = fopen("graphics.log","a");
+    cur = list->head;
+
+    if(logFile==NULL)
+    {/* Handles the file not existing problem */
+        perror("There was an error opening the log file");
+        failed = TRUE;
+    }
+    else if(ferror(logFile))
+    {/* Checks if file is okay to use */
+        perror("There was an error with the log file");
+        fclose(logFile);
+        failed = TRUE;
+    }
+    else
+    {
+        if(fputs("---\n",logFile)!=EOF)
+        {
+            do
+            {
+                fputs(cur->command,logFile);
+                cur = cur->next;
+            }while(cur!=NULL);
+            fclose(logFile);
+        }
+        else
+        {
+            fprintf(stderr,"There was an error writing to the file\n");
+            failed = TRUE;
+            fclose(logFile);
+        }
+    }
     return failed;
 }
 

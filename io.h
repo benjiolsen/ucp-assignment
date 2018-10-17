@@ -19,5 +19,7 @@ int readLines(LinkedList* list,char* filename);
 /* Duplicates the stack string into a malloced string so that I could use
    pointers easier */
 char* stringDupe(char* source);
+/* Prints out a linked list of the log to a logfile */
+int commandLog(LinkedList* list);
 
 #endif
