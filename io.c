@@ -81,12 +81,13 @@ int commandLog(LinkedList* list)
     else
     {
         if(fputs("---\n",logFile)!=EOF)
-        {
+        {/* As per the spec, appends the file beginning with --- */
             do
-            {
+            {/* Loops through the list until its empty */
                 fputs(cur->command,logFile);
                 cur = cur->next;
             }while(cur!=NULL);
+            /* Cant forget to close this dangley boi */
             fclose(logFile);
         }
         else
@@ -103,6 +104,7 @@ char* stringDupe(char* source)
 {
     char *dest;
     dest = (char*)malloc((strlen(source)+1)*sizeof(char));
+    /* Mallocs the new string */
     if(dest != NULL)
     {/* Pray to god malloc doesnt fail */
         strcpy(dest,source);

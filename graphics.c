@@ -22,10 +22,11 @@ void start(char* filename)
         if(test(list)==TRUE)
         {
             if(execute(list)==TRUE)
-            {
+            {/* Handles file error */
             }
             else
-            {
+            {/* Like elsewhere, doent use perror, as perror: Success,
+                looks funny */
                 fprintf(stderr,"There was an error executing the function");
             }
         }
@@ -38,7 +39,6 @@ void start(char* filename)
     {
         fprintf(stderr,"There was an erronous file\n");
     }
-
-
+    /* Tidies up */
     freeList(list);
 }

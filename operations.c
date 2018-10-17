@@ -7,8 +7,10 @@ void rotate(double* curAngle,double newAngle)
 
 void distance(Position* pos,double angle,double dist)
 {
+    /* Ensures the current position is kept */
     pos->x1 = pos->x2;
     pos->y1 = pos->y2;
+    /* Updates the position based upon the old position */
     pos->x2 = pos->x1 + ( dist * (cos(angle)) );
     pos->y2 = pos->y1 + ( dist * (sin(angle)) );
 }
@@ -48,6 +50,7 @@ int execute(LinkedList* list)
     pos->y2 = 0.0;
     cur = list->head;
 
+    /* Set up */
     clearScreen();
     setFgColour(7);
     setBgColour(0);
@@ -56,15 +59,20 @@ int execute(LinkedList* list)
     {/* Runs through the commands executing their values */
         if(strcmp(cur->command,"MOVE")==0)
         {
+            /* Moves the cursor but doesnt print */
             dist = atof(cur->value)-1.0;
             distance(pos,angle,1.0);
             distance(pos,angle,dist);
+            /* Outputs the effect of the move into a string, then into a
+               Linked List */
             sprintf(logString,"%4s (%07.3f,%07.3f)-(%07.3f,%07.3f)\n",
                                                             cur->command,
                                                             pos->x1,pos->y1,
                                                             pos->x2,pos->y2);
             value = stringDupe(" ");
             command = stringDupe(logString);
+            /* If the mode is debug, it will print it out along side the
+               regular printing */
             #ifdef DEBUG
             fprintf(stderr,"%s",logString);
             #endif
@@ -72,43 +80,45 @@ int execute(LinkedList* list)
         }
         else if(strcmp(cur->command,"DRAW")==0)
         {
+            /* Moves the cursor and draws a line accordingly */
             dist = atof(cur->value) - 1.0;
             distance(pos,angle,1.0);
             distance(pos,angle,dist);
             line(round(pos->x1),round(pos->y1),round(pos->x2),
                  round(pos->y2),&plotter,&pattern);
-                 sprintf(logString,"%4s (%07.3f,%07.3f)-(%07.3f,%07.3f)\n",
+            /* Outputs the effect of the move into a string, then into a
+               Linked List */
+            sprintf(logString,"%4s (%07.3f,%07.3f)-(%07.3f,%07.3f)\n",
                                                             cur->command,
                                                             pos->x1,pos->y1,
                                                             pos->x2,pos->y2);
-                 value = stringDupe(" ");
-                 command = stringDupe(logString);
-                 #ifdef DEBUG
-                 fprintf(stderr,"%s",logString);
-                 #endif
-                 insertFirst(logList,command,value);
+            value = stringDupe(" ");
+            command = stringDupe(logString);
+            /* If the mode is debug, it will print it out along side the
+               regular printing */
+            #ifdef DEBUG
+            fprintf(stderr,"%s",logString);
+            #endif
+            insertFirst(logList,command,value);
         }
         else if(strcmp(cur->command,"ROTATE")==0)
         {
+            /* Converts each angle to the radian value and then edits the
+               current angle depending on the new angle */
             newAngle = atof(cur->value);
             radians(&newAngle);
             rotate(&angle,newAngle);
         }
-
+        /* If the simple version isnt run, the colours will behave as normal,
+           otherwise they will take on the default value */
         #ifndef SIMPLE
         else if(strcmp(cur->command,"FG")==0)
         {
-            if(atoi(cur->value)>=0)
-            {
-                setFgColour(round(atoi(cur->value)));
-            }
+            setFgColour(round(atoi(cur->value)));
         }
         else if(strcmp(cur->command,"BG")==0)
         {
-            if(atoi(cur->value)>=0)
-            {
-                setBgColour(round(atoi(cur->value)));
-            }
+            setBgColour(round(atoi(cur->value)));
         }
         #endif
 
@@ -119,10 +129,12 @@ int execute(LinkedList* list)
 
         cur = cur->next;
     }while(cur!=NULL&&valid == TRUE);
+
     if(commandLog(logList)==TRUE)
-    {
+    {/* Prints to the log file, or tells the user of their error */
         fprintf(stderr,"There was an error with the logfile!\n");
     }
+
     freeList(logList);
     penDown();
     free(pos);
@@ -137,14 +149,17 @@ void radians(double* degrees)
 void plotter(void *plotData)
 {
     if(((char*)plotData == plotData)&&(plotData != NULL))
-    {
+    {/* Ensures the data is infact a string, and isnt null
+        then prints */
         printf("%s",(char*)plotData);
     }
 }
 
 int test(LinkedList* list)
 {
+    /* Uses a node that changes where it points to, to move through the list */
     ListNode* cur = list->head;
+    /* These strings are used to make sure the commands are valid */
     char move[] = "MOVE";
     char rotate[] = "ROTATE";
     char draw[] = "DRAW";
@@ -161,42 +176,45 @@ int test(LinkedList* list)
            strcmp(cur->command,fg)==0 ||
            strcmp(cur->command,bg)==0 ||
            strcmp(cur->command,pattern)==0)
-        {
+        {/* Ensures the input command matches one of the specified ones */
             if(strcmp(cur->command,rotate)==0)
             {
                 if(atof(cur->value)>360.0||atof(cur->value)<0.0)
-                {
+                {/* As per specification */
                     correct = FALSE;
                 }
             }
             if(strcmp(cur->command,fg)==0)
             {
                 if(atoi(cur->value)<0||atoi(cur->value)>15)
-                {
+                {/* As per specification */
                     correct = FALSE;
                 }
             }
             if(strcmp(cur->command,bg)==0)
             {
                 if(atoi(cur->value)<0||atoi(cur->value)>7)
-                {
+                {/* As per specification */
                     correct = FALSE;
                 }
             }
             if(strcmp(cur->command,pattern)==0)
             {
                 if(strcmp(cur->value," ")==0)
-                {
+                {/* As per specification */
                     correct = FALSE;
                 }
             }
         }
         else
-        {
+        {/* If it matches none of the commands, the file is invalid, print an
+            error */
             correct=FALSE;
         }
+        /* Points to the next node */
         cur = cur->next;
     }while(correct==TRUE&&cur!=NULL);
+
     return correct;
 }
 
