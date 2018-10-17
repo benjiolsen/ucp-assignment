@@ -23,7 +23,6 @@ void start(char* filename)
         {
             if(execute(list)==TRUE)
             {
-
             }
             else
             {
