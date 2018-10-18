@@ -1,3 +1,10 @@
+/*
+Created by: Benjamin Olsen
+Student Number: 19481681
+Purpose: To act as the header file for the main graphics file. Includes the
+         definition of true and false which is used throughout the program
+         and also the function prototypes and includes needed
+*/
 #ifndef GRAPHICS_H
 /* Header Guard */
 #define GRAPHICS_H

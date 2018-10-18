@@ -1,3 +1,11 @@
+/*
+Created by: Benjamin Olsen
+Student Number: 19481681
+Purpose: To act as the file which contains all the functions to manipulate a
+         linked list, and create linked lists. The list implemented is a doubly
+         ended, doubly linked list, and therefore the functions implement the
+         use of the tail pointer and previous pointers.
+*/
 #include "linkedlist.h"
 LinkedList* makeEmpty()
 {

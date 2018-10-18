@@ -1,3 +1,12 @@
+/*
+Created by: Benjamin Olsen
+Student Number: 19481681
+Purpose: Acts to contain all the functions needed for file I/O, including the
+         creation of the logfile, and the reading in of the file from the
+         command line parameter. Also contains the function stringDupe(), which
+         is used to create a heap allocated string which should be of the right
+         size, and not 1024 characters long like the stack'd buffer string.
+*/
 #include "io.h"
 
 int readLines(LinkedList* list,char* filename)

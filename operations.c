@@ -1,5 +1,12 @@
+/*
+Created by: Benjamin Olsen
+Student Number: 19481681
+Purpose: To act as the file containing all various operations other than file
+         I/O that the program needs, ranging from simple rotation, all the way
+         through to validation of the incoming commands. This is the file which
+         calls the effects.c functions such as line, and clearScreen etc. etc.
+*/
 #include "operations.h"
-
 void rotate(double* curAngle,double newAngle)
 {
     *curAngle = *curAngle - newAngle;

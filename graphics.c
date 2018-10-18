@@ -1,3 +1,10 @@
+/*
+Created by: Benjamin Olsen
+Student Number: 19481681
+Purpose: To act as the file containing the main function, which ensures the
+         parameters on the command line is valid, and then executes the
+         functions as it goes, ensuring each attempt is valid as it goes.
+*/
 #include "graphics.h"
 int main(int argc,char** argv)
 {
