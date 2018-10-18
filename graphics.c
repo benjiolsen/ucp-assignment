@@ -32,7 +32,7 @@ void start(char* filename)
             {/* Handles file error */
             }
             else
-            {/* Like elsewhere, doent use perror, as perror: Success,
+            {/* Like elsewhere, doesn't use perror, as perror: Success,
                 looks funny */
                 fprintf(stderr,"There was an error executing the function");
             }
