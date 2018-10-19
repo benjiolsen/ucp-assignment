@@ -6,6 +6,8 @@ Purpose: To act as the file which contains all the functions to manipulate a
          ended, doubly linked list, and therefore the functions implement the
          use of the tail pointer and previous pointers.
 */
+/* Obtained from Benjamin Olsen (me), Previously submitted with the UCP structs
+   practical */
 #include "linkedlist.h"
 LinkedList* makeEmpty()
 {

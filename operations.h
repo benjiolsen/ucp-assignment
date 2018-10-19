@@ -30,7 +30,6 @@ typedef struct
 /* Iterates through a string and converts each lowercase letter to an
    uppercase letter by shifting the ASCII value down */
 void upperCase(char* string);
-
 /* Runs through the commands and validates them to ensure they are the correct
    commands, adn their values are in the correct range and datatype */
 int test(LinkedList* list);
@@ -47,5 +46,8 @@ void rotate(double* curAngle,double newAngle);
 /* Runs through the commands and then executes them depending on what needs to be
    done */
 int execute(LinkedList* list);
+/* Runs the needed calculations (dcos(theta)) and (dsin(theta)) for x and y
+   whilst preserving the previous position */
+void distance(Position* pos,double angle,double dist);
 
 #endif
