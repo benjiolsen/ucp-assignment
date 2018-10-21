@@ -23,8 +23,9 @@ Purpose: To act as the header file for the file IO file. Contains the function
 /* Reads the lines into a linked list, creating a string of the right size
    and sending that to insertLast */
 int readLines(LinkedList* list,char* filename);
-/* Duplicates a string to a new heap allocated string. I use this so i can use a
-   string of smaller size, rather than the buffered size stack string in my ll */
+/* Duplicates a string to a new heap allocated string. I use this so i can
+   use a string of smaller size, rather than the buffered size stack string
+   in my ll */
 char* stringDupe(char* source);
 /* Handles the creation/appending to a logfile for the graphics.log */
 int commandLog(LinkedList* list);
