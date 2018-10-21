@@ -3,8 +3,8 @@ Created by: Benjamin Olsen
 Student Number: 19481681
 Purpose: To act as the file containing all various operations other than file
          I/O that the program needs, ranging from simple rotation, all the way
-         through to validation of the incoming commands. This is the file which
-         calls the effects.c functions such as line, and clearScreen etc. etc.
+         through to validation of the incoming commands. This is the file
+         which calls the effects.c functions such as line, and clearScreen etc
 */
 #include "operations.h"
 void rotate(double* curAngle,double newAngle)
@@ -51,10 +51,6 @@ int execute(LinkedList* list)
 
     logList = makeEmpty();
 
-    pos->x1 = 0.0;
-    pos->x2 = 0.0;
-    pos->y1 = 0.0;
-    pos->y2 = 0.0;
     cur = list->head;
 
     /* Set up */
@@ -67,8 +63,7 @@ int execute(LinkedList* list)
         if(strcmp(cur->command,"MOVE")==0)
         {
             /* Moves the cursor but doesnt print */
-            dist = atof(cur->value)-1.0;
-            distance(pos,angle,1.0);
+            dist = atof(cur->value);
             distance(pos,angle,dist);
             /* Outputs the effect of the move into a string, then into a
                Linked List */
@@ -83,16 +78,16 @@ int execute(LinkedList* list)
             #ifdef DEBUG
             fprintf(stderr,"%s",logString);
             #endif
-            insertFirst(logList,command,value);
+            insertLast(logList,command,value);
         }
         else if(strcmp(cur->command,"DRAW")==0)
         {
             /* Moves the cursor and draws a line accordingly */
-            dist = atof(cur->value) - 1.0;
-            distance(pos,angle,1.0);
+            dist = atof(cur->value)-1;
+            distance(pos,angle,1);
             distance(pos,angle,dist);
             line(round(pos->x1),round(pos->y1),round(pos->x2),
-                 round(pos->y2),&plotter,&pattern);
+            round(pos->y2),&plotter,&pattern);
             /* Outputs the effect of the move into a string, then into a
                Linked List */
             sprintf(logString,"%4s (%07.3f,%07.3f)-(%07.3f,%07.3f)\n",
@@ -106,7 +101,7 @@ int execute(LinkedList* list)
             #ifdef DEBUG
             fprintf(stderr,"%s",logString);
             #endif
-            insertFirst(logList,command,value);
+            insertLast(logList,command,value);
         }
         else if(strcmp(cur->command,"ROTATE")==0)
         {
@@ -144,13 +139,15 @@ int execute(LinkedList* list)
 
     freeList(logList);
     penDown();
+    setFgColour(7);
+    setBgColour(0);
     free(pos);
     return valid;
 }
 
 void radians(double* degrees)
 {/* RAD = DEG * PI/180 ezpz*/
-    *degrees = ( (*degrees) * (PI/180) );
+    *degrees = ( (*degrees) * (PI/180.0) );
 }
 
 void plotter(void *plotData)
@@ -186,7 +183,7 @@ int test(LinkedList* list)
         {/* Ensures the input command matches one of the specified ones */
             if(strcmp(cur->command,rotate)==0)
             {
-                if(atof(cur->value)>360.0||atof(cur->value)<0.0)
+                if(atof(cur->value)>360.0||atof(cur->value)<-360.0)
                 {/* As per specification */
                     correct = FALSE;
                 }
