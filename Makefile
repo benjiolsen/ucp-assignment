@@ -25,6 +25,7 @@ TurtleGraphicsDebug: $(OBJ) debug.o
 	$(CC) $(OBJ) $(MATH) -o $(OUTDEBUG)
 TurtleGraphicsSimple: $(OBJ) simple.o
 	$(CC) $(OBJ) $(MATH) -o $(OUTSIMPLE)
+	rm operations.o
 
 linkedlist.o: linkedlist.c linkedlist.h
 	$(CC) $(CFLAGS) linkedlist.c
